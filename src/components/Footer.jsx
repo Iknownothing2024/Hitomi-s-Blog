@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { Heart } from 'lucide-react';
 
 const Footer = memo(() => (
   <footer className="bg-transparent text-white border-t border-white/5">

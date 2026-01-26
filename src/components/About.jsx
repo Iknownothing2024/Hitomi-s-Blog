@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Calendar, MapPin, ExternalLink } from 'lucide-react';
+import { Calendar, MapPin } from 'lucide-react';
 import Sidebar from './Sidebar';
 
 const About = memo(() => (
@@ -16,7 +16,6 @@ const About = memo(() => (
             <div className="space-y-4 text-sm text-gray-200/80">
                <p>2026年1月23日 金曜日</p>
             </div>
-            <br></br>
             <div className="space-y-4 text-gray-200/90">
               <p>
                 网络漫游者，蛰居在阴暗小房间的宅男，妄想时空穿越，想要转生異世界，永遠に十八歳未満です

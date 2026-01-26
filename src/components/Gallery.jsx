@@ -13,7 +13,6 @@ const importImages = () => {
     return {
       id: filename,
       title: filename.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
-      description: `Image: ${filename}`,
       imagePath: module.default,
     };
   });

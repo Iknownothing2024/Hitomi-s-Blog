@@ -21,7 +21,6 @@ export const preloadBackgroundImage = (src) => {
     const img = new Image();
     img.onload = () => resolve(src);
     img.onerror = () => {
-      console.warn(`Failed to load background image: ${src}`);
       // Fallback to a default image or reject
       reject(new Error(`Failed to load image: ${src}`));
     };

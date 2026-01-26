@@ -34,7 +34,8 @@ const sampleTracks = [
     artist: '宠物蜥蜴娘',
     src: '/music/Комнатное растение [EmBlyMdrkgA].f140.m4a',
   },
-  {  id: 6,
+  {
+    id: 6,
     title: 'Киберстранник',
     artist: '宠物蜥蜴娘',
     src: '/music/Киберстранник [MRGTm1CKAFg].f140.m4a',

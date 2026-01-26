@@ -14,7 +14,6 @@ const importImages = () => {
       id: filename,
       title: filename.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
       imagePath: module.default,
-      date: new Date().toLocaleDateString(),
     };
   });
 };
@@ -112,7 +111,7 @@ const ImageDetail = memo(() => {
           {/* Image Detail */}
           <div className="bg-gray-800/40 backdrop-blur-md rounded-lg overflow-hidden border border-gray-700/30 shadow-2xl">
             {/* Image Display */}
-            <div className=" p-8  flex justify-center items-center rounded-xl">
+            <div className="p-8 flex justify-center items-center rounded-xl">
               <img 
                 src={image.imagePath} 
                 alt={image.title}
@@ -123,13 +122,9 @@ const ImageDetail = memo(() => {
             
             {/* Image Information - Minimalist Info Bar */}
             <div className="p-6">
-              {/* Compact Header with Title and Metadata */}
+              {/* Compact Header with Title */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
                 <h1 className="text-2xl font-bold text-white">{image.title}</h1>
-                <div className="flex items-center gap-4 text-sm text-gray-200">
-                  <span>{image.date}</span>
-                  <span className="text-gray-500">•</span> 
-                </div>
               </div>
             </div>
             

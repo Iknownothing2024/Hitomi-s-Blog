@@ -60,7 +60,6 @@ export const useAudioPlayer = (tracks, initialIndex = 0, autoPlay = false) => {
           setIsPlaying(true);
         } catch (error) {
           // Autoplay was blocked, fail gracefully
-          console.log('Autoplay blocked:', error.message);
           setIsPlaying(false);
         } finally {
           setIsLoading(false);
@@ -158,7 +157,6 @@ export const useAudioPlayer = (tracks, initialIndex = 0, autoPlay = false) => {
           await audioRef.current.play();
           setIsPlaying(true);
         } catch (error) {
-          console.log('Auto-play blocked or interrupted:', error.message);
           setIsPlaying(false);
         } finally {
           setIsLoading(false);

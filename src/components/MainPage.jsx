@@ -48,7 +48,6 @@ const MainPage = memo(() => {
                     </div>
                   </header>
                   <div className="flex items-center text-primary-400 group-hover:text-primary-300 transition-colors mt-4">
-                    <span className="text-sm font-medium"></span>
                     <svg 
                       className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" 
                       fill="none" 
