@@ -50,9 +50,20 @@ export const useAudioPlayer = (tracks, initialIndex = 0, autoPlay = false) => {
     };
   }, []);
 
+  // Initialize audio element with current track
+  useEffect(() => {
+    if (currentTrack && audioRef.current) {
+      // Only set source if it's different or not set
+      if (!audioRef.current.src || audioRef.current.src !== currentTrack.src) {
+        audioRef.current.src = currentTrack.src;
+        audioRef.current.load();
+      }
+    }
+  }, [currentTrack?.id]); // Only trigger when track ID changes
+
   // Auto-play logic (only for initial mount)
   useEffect(() => {
-    if (currentTrack && audioRef.current && autoPlay && currentIndex === 0) {
+    if (currentTrack && audioRef.current && autoPlay && currentIndex === 0 && !hasInteracted) {
       const attemptAutoPlay = async () => {
         try {
           setIsLoading(true);
@@ -68,26 +79,8 @@ export const useAudioPlayer = (tracks, initialIndex = 0, autoPlay = false) => {
 
       // Try to auto-play immediately
       attemptAutoPlay();
-
-      // Also try to auto-play after user interaction if initially blocked
-      if (!hasInteracted) {
-        const tryPlayAfterInteraction = () => {
-          if (audioRef.current && !isPlaying && hasInteracted) {
-            attemptAutoPlay();
-          }
-        };
-
-        // Set up a one-time check after user interaction
-        const interactionTimer = setTimeout(() => {
-          if (hasInteracted && !isPlaying) {
-            tryPlayAfterInteraction();
-          }
-        }, 100);
-
-        return () => clearTimeout(interactionTimer);
-      }
     }
-  }, [currentTrack, autoPlay, hasInteracted, isPlaying, currentIndex]); // Add currentIndex to prevent conflicts
+  }, [currentTrack?.id, autoPlay, hasInteracted, currentIndex]); // Use currentTrack.id instead of isPlaying
 
   // Update current time as audio plays
   useEffect(() => {
@@ -114,71 +107,29 @@ export const useAudioPlayer = (tracks, initialIndex = 0, autoPlay = false) => {
     };
   }, [currentIndex]); // Re-bind when track changes
 
-  // Handle track change with seamless auto-playback
+  // Handle track change auto-play behavior
   useEffect(() => {
-    if (currentTrack && audioRef.current) {
-      setIsLoading(true);
-      
-      // Stop current playback immediately
-      if (!audioRef.current.paused) {
-        audioRef.current.pause();
-      }
-      
-      // Reset current time
-      audioRef.current.currentTime = 0;
-      setCurrentTime(0);
-      
-      // Update source and load new track
-      audioRef.current.src = currentTrack.src;
-      
-      // Set up event listeners for the new track
-      const handleCanPlay = () => {
-        audioRef.current.removeEventListener('canplay', handleCanPlay);
-        audioRef.current.removeEventListener('error', handleError);
-        
-        // Auto-play if autoPlay is enabled and user hasn't explicitly paused
-        if (autoPlay && !userPaused) {
-          attemptPlayback();
-        } else {
-          setIsLoading(false);
-        }
-      };
-
-      const handleError = (error) => {
-        audioRef.current.removeEventListener('canplay', handleCanPlay);
-        audioRef.current.removeEventListener('error', handleError);
-        console.error('Error loading audio:', error);
-        setIsLoading(false);
-        setIsPlaying(false);
-      };
-
+    if (currentTrack && audioRef.current && autoPlay && !userPaused) {
+      // Only auto-play if track changed and user hasn't paused
       const attemptPlayback = async () => {
         try {
           await audioRef.current.play();
           setIsPlaying(true);
         } catch (error) {
           setIsPlaying(false);
-        } finally {
-          setIsLoading(false);
         }
       };
 
-      // Add event listeners for the new track
-      audioRef.current.addEventListener('canplay', handleCanPlay);
-      audioRef.current.addEventListener('error', handleError);
-      
-      // Load the new track
-      audioRef.current.load();
-    }
+      // Wait a bit for the audio to be ready
+      const timeoutId = setTimeout(() => {
+        if (audioRef.current.readyState >= 2) { // HAVE_CURRENT_DATA
+          attemptPlayback();
+        }
+      }, 100);
 
-    // Cleanup function
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.removeEventListener('canplay', () => {});
-        audioRef.current.removeEventListener('error', () => {});
-      }
-    };
-  }, [currentTrack, autoPlay, userPaused]); // Include userPaused to respect user pause state
+      return () => clearTimeout(timeoutId);
+    }
+  }, [currentTrack?.id, autoPlay, userPaused]); // Only trigger when track actually changes
 
   // Toggle play/pause
   const togglePlayPause = useCallback(async () => {
@@ -199,7 +150,7 @@ export const useAudioPlayer = (tracks, initialIndex = 0, autoPlay = false) => {
       console.error('Error playing audio:', error);
       setIsPlaying(false);
     }
-  }, [isPlaying, currentTrack]);
+  }, [isPlaying, currentTrack?.id]); // Use currentTrack.id to prevent stale closures
 
   // Handle progress bar click for seeking
   const handleProgressClick = useCallback((e) => {
@@ -229,6 +180,12 @@ export const useAudioPlayer = (tracks, initialIndex = 0, autoPlay = false) => {
     const nextIndex = (currentIndex + 1) % tracks.length;
     setCurrentIndex(nextIndex);
     setUserPaused(false); // Reset user pause when navigating
+    
+    // Reset current time for new track
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      setCurrentTime(0);
+    }
   }, [currentIndex, tracks.length]);
 
   // Handle previous track
@@ -238,12 +195,24 @@ export const useAudioPlayer = (tracks, initialIndex = 0, autoPlay = false) => {
     const prevIndex = currentIndex === 0 ? tracks.length - 1 : currentIndex - 1;
     setCurrentIndex(prevIndex);
     setUserPaused(false); // Reset user pause when navigating
+    
+    // Reset current time for new track
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      setCurrentTime(0);
+    }
   }, [currentIndex, tracks.length]);
 
   // Handle track selection by index
   const handleTrackSelect = useCallback((index) => {
     if (index >= 0 && index < tracks.length) {
       setCurrentIndex(index);
+      
+      // Reset current time for new track
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        setCurrentTime(0);
+      }
     }
   }, [tracks.length]);
 

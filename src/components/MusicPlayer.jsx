@@ -51,6 +51,12 @@ const sampleTracks = [
     title: 'I really want to stay at your house',
     artist: 'Cyberpunk2077',
     src: '/music/I really want to stay at your house.m4a',
+  },
+  {
+    id: 9,
+    title: 'Твой режим',
+    artist: '宠物蜥蜴娘',
+    src: '/music/Твой режим [MSujEFe0RhE].f140.m4a',
   }
 ];
 
