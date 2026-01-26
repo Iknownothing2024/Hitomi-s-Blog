@@ -12,6 +12,7 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, 'src'),
       '/Pics': resolve(__dirname, 'src/assets/Pics'),
+      '/RandomBackgroundPics': resolve(__dirname, 'public/Pics/RandomBackgroundPics'),
     },
   },
   publicDir: 'public',
