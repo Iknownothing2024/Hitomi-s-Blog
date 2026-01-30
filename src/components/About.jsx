@@ -1,11 +1,11 @@
-import React, { memo } from 'react';
-import { Calendar, MapPin } from 'lucide-react';
-import Sidebar from './Sidebar';
+import React, { memo } from "react";
+import { Calendar, MapPin } from "lucide-react";
+import Sidebar from "./Sidebar";
 
 const About = memo(() => (
   <div className="min-h-screen pt-16">
     <Sidebar />
-    
+
     {/* Main Content */}
     <main className="ml-96 p-8">
       <div className="max-w-4xl mx-auto">
@@ -14,18 +14,14 @@ const About = memo(() => (
           <div className="bg-gray-800/40 backdrop-blur-sm rounded-lg p-6 border border-gray-700/30">
             <h4 className="text-xl font-bold mb-4 text-white">关于我</h4>
             <div className="space-y-4 text-sm text-gray-200/80">
-               <p>2026年1月23日 金曜日</p>
+              <p>2026年1月23日 金曜日</p>
             </div>
             <div className="space-y-4 text-gray-200/90">
               <p>
                 网络漫游者，蛰居在阴暗小房间的宅男，妄想时空穿越，想要转生異世界，永遠に十八歳未満です
               </p>
-              <p>
-                我每天都在重复着
-              </p>
-              <p>
-                只想重开到2019-2020年
-              </p>
+              <p>我每天都在重复着</p>
+              <p>只想重开到2019-2020年</p>
             </div>
           </div>
 
@@ -39,13 +35,16 @@ const About = memo(() => (
               <div className="flex justify-between items-start">
                 <span className="text-gray-200/90">博客创建日期</span>
 
-              <div className="text-right text-gray-300/70 leading-tight">
-                <div className="text-sm text-gray-300/60 text-left" >二零二六年</div>
-                <div className="text-sm text-gray-300/60 text-left">一月</div>
-                <div className="text-sm text-gray-300/60 text-left">十一日</div>
+                <div className="text-right text-gray-300/70 leading-tight">
+                  <div className="text-sm text-gray-300/60 text-left">
+                    二零二六年
+                  </div>
+                  <div className="text-sm text-gray-300/60 text-left">一月</div>
+                  <div className="text-sm text-gray-300/60 text-left">
+                    十一日
+                  </div>
+                </div>
               </div>
-              </div>
-
             </div>
 
             <div className="bg-gray-800/40 backdrop-blur-sm rounded-lg p-6 border border-gray-700/30">
@@ -75,6 +74,6 @@ const About = memo(() => (
   </div>
 ));
 
-About.displayName = 'About';
+About.displayName = "About";
 
 export default About;

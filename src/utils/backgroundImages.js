@@ -1,6 +1,6 @@
-// Dynamic import of all background images from /public/Pics/RandomBackgroundPics/ directory
+// Dynamic import of all background images from /src/assets/Pics/RandomBackgroundPics/directory
 // Uses Vite's import.meta.glob to automatically detect image files
-const imageModules = import.meta.glob('/public/Pics/RandomBackgroundPics/*.{jpeg,jpg,png,webp}', { 
+const imageModules = import.meta.glob('/src/assets/Pics/RandomBackgroundPics/*.{jpeg,jpg,png,webp}', { 
   eager: true, 
   query: '?url', 
   import: 'default' 

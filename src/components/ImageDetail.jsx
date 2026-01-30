@@ -2,7 +2,7 @@ import React, { memo, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
 
-// Dynamic import of all images from /src/assets/pics/
+// Dynamic import of all images from /public/Pics/
 const importImages = () => {
   const images = import.meta.glob('/src/assets/Pics/*.{png,jpg,jpeg}', { eager: true });
   

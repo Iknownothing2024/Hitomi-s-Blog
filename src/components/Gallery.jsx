@@ -2,9 +2,9 @@ import React, { memo, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
 
-// Dynamic import of all images from /src/assets/pics/
+// Dynamic import of all images from /public/pics/
 const importImages = () => {
-  const images = import.meta.glob('/src/assets/Pics/*.{png,jpg,jpeg}', { eager: true });
+  const images = import.meta.glob('/public/Pics/*.{png,jpg,jpeg}', { eager: true });
   
   return Object.entries(images).map(([path, module], index) => {
     // Extract filename from path and remove extension
@@ -57,9 +57,9 @@ const Gallery = memo(() => {
           {/* Error handling for empty gallery */}
           {galleryImages.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-400 text-lg">No images found in the gallery.</p>
+              <p className="text-gray-400 text-lg">404</p>
               <p className="text-gray-500 text-sm mt-2">
-                Add images to /src/assets/pics/ to see them here.
+                Not Found Images
               </p>
             </div>
           ) : (
