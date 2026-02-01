@@ -2,9 +2,9 @@ import React, { memo, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
 
-// Dynamic import of all images from /public/pics/
+// Dynamic import of all images from /src/assets/Pics/
 const importImages = () => {
-  const images = import.meta.glob('/public/Pics/*.{png,jpg,jpeg}', { eager: true });
+  const images = import.meta.glob('/src/assets/Pics/*.{png,jpg,jpeg}', { eager: true });
   
   return Object.entries(images).map(([path, module], index) => {
     // Extract filename from path and remove extension

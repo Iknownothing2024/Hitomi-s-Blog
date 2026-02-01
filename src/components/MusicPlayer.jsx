@@ -1,4 +1,5 @@
-import React, { memo } from 'react';
+import React, { memo, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { useAudioPlayer } from '../hooks/useAudioPlayer';
 import { Loader2, Play, Pause, SkipBack, SkipForward, Volume2 } from 'lucide-react';
 
@@ -57,10 +58,23 @@ const sampleTracks = [
     title: 'Твой режим',
     artist: '宠物蜥蜴娘',
     src: '/music/Твой режим [MSujEFe0RhE].f140.m4a',
+  },
+  {
+    id: 10,
+    title: 'Sakura no Uta OST - 夢の歩みを見上げて',
+    artist: 'Sakura no Uta',
+    src: '/music/Sakura no Uta OST - 夢の歩みを見上げて [HQ] [-2NBBtuHBKY].f140.m4a',
+  },
+  {
+    id: 11,
+    title: 'Akira Kosemura - Ahead of Us',
+    artist: 'Akira Kosemura',
+    src: '/music/Akira Kosemura - Ahead of Us [dlI1TWSL92k].f140.m4a',
   }
 ];
 
 const MusicPlayer = memo(() => {
+  const constraintsRef = useRef(null);
   const {
     audioRef,
     progressBarRef,
@@ -82,7 +96,15 @@ const MusicPlayer = memo(() => {
   } = useAudioPlayer(sampleTracks, 0, true); // Enable auto-play
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 z-50">
+    <div ref={constraintsRef} className="fixed inset-0 pointer-events-none z-50">
+      <motion.div 
+        className="fixed bottom-4 right-4 w-80 pointer-events-auto cursor-grab active:cursor-grabbing select-none"
+        drag
+        dragMomentum={false}
+        dragConstraints={constraintsRef}
+        dragElastic={0}
+        whileDrag={{ scale: 1.02 }}
+      >
       {/* Glassmorphism Container */}
       <div className="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 shadow-2xl p-4">
         {/* Hidden Audio Element */}
@@ -111,8 +133,9 @@ const MusicPlayer = memo(() => {
             <button
               onClick={handlePrev}
               disabled={totalTracks <= 1}
-              className="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-200 border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-200 border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed pointer-events-auto"
               aria-label="Previous track"
+              onPointerDown={(e) => e.stopPropagation()}
             >
               <SkipBack size={16} className="text-white" />
             </button>
@@ -121,8 +144,9 @@ const MusicPlayer = memo(() => {
             <button
               onClick={togglePlayPause}
               disabled={isLoading || !currentTrack}
-              className="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all duration-200 border border-white/30 disabled:opacity-50"
+              className="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all duration-200 border border-white/30 disabled:opacity-50 pointer-events-auto"
               aria-label={isPlaying ? 'Pause' : 'Play'}
+              onPointerDown={(e) => e.stopPropagation()}
             >
               {isLoading ? (
                 <Loader2 size={18} className="text-white animate-spin" />
@@ -137,8 +161,9 @@ const MusicPlayer = memo(() => {
             <button
               onClick={handleNext}
               disabled={totalTracks <= 1}
-              className="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-200 border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-200 border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed pointer-events-auto"
               aria-label="Next track"
+              onPointerDown={(e) => e.stopPropagation()}
             >
               <SkipForward size={16} className="text-white" />
             </button>
@@ -150,7 +175,8 @@ const MusicPlayer = memo(() => {
           <div
             ref={progressBarRef}
             onClick={handleProgressClick}
-            className="relative h-1 bg-white/20 rounded-full cursor-pointer group"
+            className="relative h-1 bg-white/20 rounded-full cursor-pointer group pointer-events-auto"
+            onPointerDown={(e) => e.stopPropagation()}
           >
             {/* Progress Fill */}
             <div
@@ -190,10 +216,11 @@ const MusicPlayer = memo(() => {
               step="0.01"
               value={volume}
               onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
-              className="w-full h-1 bg-white/20 rounded-full appearance-none cursor-pointer slider"
+              className="w-full h-1 bg-white/20 rounded-full appearance-none cursor-pointer slider pointer-events-auto"
               style={{
                 background: `linear-gradient(to right, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.6) ${volume * 100}%, rgba(255, 255, 255, 0.2) ${volume * 100}%, rgba(255, 255, 255, 0.2) 100%)`
               }}
+              onPointerDown={(e) => e.stopPropagation()}
             />
           </div>
           
@@ -226,6 +253,7 @@ const MusicPlayer = memo(() => {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
       `}</style>
+      </motion.div>
     </div>
   );
 });

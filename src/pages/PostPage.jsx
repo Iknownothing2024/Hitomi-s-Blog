@@ -76,15 +76,31 @@ function PostPage() {
                       : children;
 
                     return !inline && match ? (
-                      <div className="relative group">
-                        <pre className="bg-gray-900/80 rounded-lg p-4 overflow-x-auto">
+                      <div className="relative group max-w-prose mx-auto">
+                        <pre 
+                          className="bg-gray-900/80 rounded-lg p-4 overflow-x-auto border border-white/10 text-sm box-border"
+                          style={{ 
+                            boxSizing: 'border-box',
+                            whiteSpace: 'pre-wrap',
+                            wordBreak: 'break-word',
+                            overflowWrap: 'break-word'
+                          }}
+                        >
                           <button
                             onClick={() => copyToClipboard(codeText, codeId)}
                             className="absolute top-2 right-2 px-2 py-1 text-xs bg-gray-700/60 hover:bg-gray-600/80 text-gray-300 rounded transition-all duration-200 opacity-0 group-hover:opacity-100"
                           >
                             {copiedCode === codeId ? "Copied!" : "Copy"}
                           </button>
-                          <code className={className} {...props}>
+                          <code 
+                            className={className} 
+                            style={{ 
+                              whiteSpace: 'pre-wrap',
+                              wordBreak: 'break-word',
+                              overflowWrap: 'break-word'
+                            }}
+                            {...props}
+                          >
                             {children}
                           </code>
                         </pre>
