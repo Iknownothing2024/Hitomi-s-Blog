@@ -16,8 +16,8 @@ const BlogArticle = memo(() => {
         <Sidebar />
         
         {/* Main Content */}
-        <main className="ml-96 p-8">
-          <div className="max-w-4xl mx-auto">
+        <main className="ml-96 p-4 md:p-6 lg:p-8">
+          <div className="max-w-6xl mx-auto">
             <div className="text-center">
               <h1 className="text-4xl font-bold mb-4 text-white">Blog Post Not Found</h1>
               <p className="text-gray-200 text-lg mb-6">The blog post you're looking for doesn't exist.</p>
@@ -36,8 +36,8 @@ const BlogArticle = memo(() => {
       <Sidebar />
       
       {/* Main Content */}
-      <main className="ml-96 p-8">
-        <div className="max-w-4xl mx-auto">
+      <main className="ml-96 p-4 md:p-6 lg:p-8">
+        <div className="max-w-6xl mx-auto">
           <article className="bg-gray-800/40 backdrop-blur-sm rounded-lg p-8 border border-gray-700/30">
             <header className="mb-8">
               <h1 className="text-4xl font-bold mb-4 text-white">{post.title}</h1>
@@ -48,9 +48,6 @@ const BlogArticle = memo(() => {
                 </div>
                 <div className="flex items-center gap-2">
                   <span>{post.author}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span>{post.readingTime} min read</span>
                 </div>
               </div>
               

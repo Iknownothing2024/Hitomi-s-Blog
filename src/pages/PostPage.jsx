@@ -28,8 +28,8 @@ function PostPage() {
         <Sidebar />
 
         {/* Main Content */}
-        <main className="ml-96 p-8">
-          <div className="max-w-4xl mx-auto">
+        <main className="ml-96 p-4 md:p-6 lg:p-8">
+          <div className="max-w-6xl mx-auto">
             <div className="bg-gray-800/40 backdrop-blur-sm rounded-lg p-8 border border-gray-700/30 text-center">
               <h1 className="text-3xl font-bold text-white mb-4">
                 Post Not Found
@@ -49,8 +49,8 @@ function PostPage() {
       <Sidebar />
 
       {/* Main Content */}
-      <main className="ml-96 p-8">
-        <div className="max-w-4xl mx-auto">
+      <main className="ml-96 p-4 md:p-6 lg:p-8">
+        <div className="max-w-6xl mx-auto">
           <div className="bg-gray-800/40 backdrop-blur-sm rounded-lg p-8 border border-gray-700/30">
             <header className="mb-6">
               <h1 className="text-3xl font-bold text-white mb-4">
