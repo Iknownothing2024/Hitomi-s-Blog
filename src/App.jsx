@@ -9,6 +9,7 @@ import ImageDetail from './components/ImageDetail';
 import About from './components/About';
 import Gallery from './components/Gallery';
 import Tags from './components/Tags';
+import ShitHitomiSays from './components/ShitHitomiSays';
 import Footer from './components/Footer';
 import MusicPlayer from './components/MusicPlayer';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -26,6 +27,7 @@ const App = memo(() => (
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/gallery/:id" element={<ImageDetail />} />
         <Route path="/about" element={<About />} />
+        <Route path="/shitHitomiSays" element={<ShitHitomiSays />} />
       </Routes>
       <Footer />
       <MusicPlayer />

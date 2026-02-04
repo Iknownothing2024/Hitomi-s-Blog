@@ -39,8 +39,8 @@ const Navbar = memo(() => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-gray-200 hover:text-primary-400 transition-colors ${
-                  isActivePath(item.path) ? 'text-primary-400' : ''
+                className={`text-gray-100 hover:text-primary-400 transition-colors font-bold${
+                  isActivePath(item.path) ? 'text-primary-400 font-bold' : ''
                 }`}
               >
                 {item.name}
@@ -74,7 +74,7 @@ const Navbar = memo(() => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                  className={`block px-3 py-2 rounded-md text-base font-bold transition-colors ${
                     isActivePath(item.path)
                       ? 'text-primary-400 bg-gray-800/50'
                       : 'text-gray-200 hover:text-primary-400 hover:bg-gray-800/50'

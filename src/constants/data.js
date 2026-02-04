@@ -27,7 +27,8 @@ export const socialLinks = [
 ];
 
 export const navItems = [
-  { name: 'Home', path: '/' },
+  { name: 'MainPage', path: '/' },
   { name: 'Gallery', path: '/gallery' },
-  { name: 'About', path: '/about' }
+  { name: 'About', path: '/about' },
+  { name: 'shitHitomiSays', path: '/shitHitomiSays' }
 ];

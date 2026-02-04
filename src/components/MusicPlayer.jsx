@@ -209,7 +209,7 @@ const MusicPlayer = memo(() => {
           
           {/* Volume Slider */}
           <div className="flex-1 relative">
-            <input
+          <input
               type="range"
               min="0"
               max="1"
@@ -230,29 +230,6 @@ const MusicPlayer = memo(() => {
           </span>
         </div>
       </div>
-      
-      {/* Custom Styles for Range Input */}
-      <style jsx>{`
-        .slider::-webkit-slider-thumb {
-          appearance: none;
-          width: 12px;
-          height: 12px;
-          background: white;
-          border-radius: 50%;
-          cursor: pointer;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        .slider::-moz-range-thumb {
-          width: 12px;
-          height: 12px;
-          background: white;
-          border-radius: 50%;
-          cursor: pointer;
-          border: none;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-      `}</style>
       </motion.div>
     </div>
   );

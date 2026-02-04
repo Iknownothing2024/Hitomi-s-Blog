@@ -20,8 +20,10 @@ const About = memo(() => (
               <p>
                 网络漫游者，蛰居在阴暗小房间的宅男，妄想时空穿越，想要转生異世界，永遠に十八歳未満です
               </p>
-              <p>我每天都在重复着</p>
+              <p>ER每天重复死宅家里蹲幻想梦幻阴暗欢乐生活就像佐藤西条拓己人见ER</p>
               <p>只想重开到2019-2020年</p>
+              <div className="text-xl font-bold text-white">And I hate DQN</div>
+              
             </div>
           </div>
 
